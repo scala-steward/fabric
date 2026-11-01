@@ -79,7 +79,9 @@ class NumberPrecisionSpec extends AnyWordSpec with Matchers {
       JsonParser(JsonFormatter.Default(json)).as[Amount] should be(amount)
     }
     "keep precise numbers beside ordinary ones in one document" in {
-      val parsed = JsonParser("""{"a": 1.0, "b": 2.5, "c": 41, "d": "12345678901234567890", "e": 123456789012345678901.234567891}""")
+      val parsed = JsonParser(
+        """{"a": 1.0, "b": 2.5, "c": 41, "d": "12345678901234567890", "e": 123456789012345678901.234567891}"""
+      )
       parsed("b") should be(NumDec(BigDecimal("2.5")))
       parsed("c") should be(NumInt(41))
       parsed("d") should be(Str("12345678901234567890"))

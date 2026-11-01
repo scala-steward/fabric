@@ -49,13 +49,12 @@ class JVMNumberPrecisionSpec extends AnyWordSpec with Matchers {
       JsoniterParser("123456789012345678901234567890").asNum.asBigInt should be(BigInt("123456789012345678901234567890"))
       JsoniterParser("41") should be(NumInt(41))
     }
-    "keep every number through YAML" in {
+    "keep every number through YAML" in
       values.foreach { v =>
         val yaml = YamlFormatter(obj("v" -> num(v)))
         val parsed = JsonParser(yaml, Format.Yaml)("v")
         parsed shouldBe a[Num]
         exact(parsed, v)
       }
-    }
   }
 }
